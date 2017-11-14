@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TemaSandia" parent="AppTheme">
+        <item name="android:windowBackground">@android:color/white</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="colorAccent">@android:color/holo_red_light</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+</resources>
