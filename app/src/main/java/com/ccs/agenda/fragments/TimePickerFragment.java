@@ -39,7 +39,7 @@ public class TimePickerFragment extends DialogFragment
         SimpleDateFormat sdf=new SimpleDateFormat("HH:mm");
         String formattedTime=sdf.format(date);
 
-        TextView tv1=(TextView) getActivity().findViewById(R.id.tv6);
+        TextView tv1=(TextView) getActivity().findViewById(R.id.tvhora);
         tv1.setText(formattedTime);
 
     }

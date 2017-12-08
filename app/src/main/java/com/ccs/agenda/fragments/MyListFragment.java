@@ -4,6 +4,9 @@ package com.ccs.agenda.fragments;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager;
@@ -16,11 +19,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.ccs.agenda.R;
 import com.ccs.agenda.activity.DetailActivity;
 import com.ccs.agenda.activity.InsertNewActivity;
+import com.ccs.agenda.activity.MainActivity;
 import com.ccs.agenda.adapters.ActivitiesAdapter;
 import com.ccs.agenda.providers.EventsContract;
 
@@ -31,7 +36,7 @@ import java.util.Date;
  * A simple {@link Fragment} subclass.
  */
 public class MyListFragment extends ListFragment implements
-        LoaderManager.LoaderCallbacks<Cursor>  {
+        LoaderManager.LoaderCallbacks<Cursor>, InsertNewFragment.NuevoDialogListener  {
 
     private ActivitiesAdapter adaptador;
     public String consulta;
@@ -68,7 +73,18 @@ public class MyListFragment extends ListFragment implements
                 EventsContract.Columnas.FECHA_EVENTO + " = '"+ FechaSelect + "' order by "+
                         EventsContract.Columnas.HORA_EVENTO + " asc ;";
 
-
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               /* Snackbar.make(view, " Evento Creado ", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                getActivity().startActivity(
+                        new Intent(getActivity(), InsertNewActivity.class)
+                );*/
+                dialogoPersonalizado();
+            }
+        });
 
 
         return view;
@@ -143,6 +159,22 @@ public class MyListFragment extends ListFragment implements
                         EventsContract.Columnas.HORA_EVENTO + " asc ;";
 
         getLoaderManager().initLoader(0,null,this);
+
+    }
+
+    public void dialogoPersonalizado(){
+        InsertNewFragment dialogoPersonalizado = new InsertNewFragment();
+        dialogoPersonalizado.show(getFragmentManager(), "personalizado");
+
+        android.support.v4.app.Fragment frag = getFragmentManager().findFragmentByTag("personalizado");
+
+        if (frag != null) {
+            getFragmentManager().beginTransaction().remove(frag).commit();
+        }
+    }
+
+    @Override
+    public void FinalizaCuadroDialogo(String texto) {
 
     }
 }

@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ccs.agenda.R;
+import com.ccs.agenda.activity.UpdateActivity;
 import com.ccs.agenda.providers.EventsContract;
 
 
@@ -21,6 +25,7 @@ public class DetailFragment extends Fragment {
 
     private TextView descripcion, titulo, fecha, hora, geo;
     private long id;
+    private Toolbar toolbar;
 
     public DetailFragment() {
     }
@@ -29,6 +34,8 @@ public class DetailFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_detail, container, false);
+        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
         titulo = (TextView) view.findViewById(R.id.titulo_text);
         descripcion = (TextView) view.findViewById(R.id.descripcion_text);
@@ -42,7 +49,6 @@ public class DetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
     }
 
     @Override
@@ -57,8 +63,9 @@ public class DetailFragment extends Fragment {
         int id = item.getItemId();
 
         switch (id) {
-            case R.id.action_edit:
 
+            case R.id.action_edit:
+                beginUpdate();
                 return true;
 
             case R.id.action_delete:
@@ -93,6 +100,18 @@ public class DetailFragment extends Fragment {
                 null,
                 null
         );
+    }
+    private void beginUpdate() {
+        getActivity()
+                .startActivity(
+                        new Intent(getActivity(), UpdateActivity.class)
+                                .putExtra(EventsContract.Columnas._ID, id)
+                                .putExtra(EventsContract.Columnas.TITULO, titulo.getText())
+                                .putExtra(EventsContract.Columnas.DESCRIPCION, descripcion.getText())
+                                .putExtra(EventsContract.Columnas.FECHA_EVENTO, fecha.getText())
+                                .putExtra(EventsContract.Columnas.HORA_EVENTO, hora.getText())
+                                .putExtra(EventsContract.Columnas.LOCALIZACION, geo.getText())
+                );
     }
 
 

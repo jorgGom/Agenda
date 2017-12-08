@@ -5,13 +5,19 @@ import android.content.ContentValues;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,12 +31,17 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class InsertNewFragment extends Fragment {
+public class InsertNewFragment extends DialogFragment implements TextView.OnEditorActionListener{
 
     private EditText descripcion,titulo,geo;
     private TextView hora,fecha;
+    private Toolbar toolbar;
+    private Button btn;
+    private ImageView imgDate, imgClock;
 
-
+    public interface NuevoDialogListener {
+        void FinalizaCuadroDialogo(String texto);
+    }
 
     public InsertNewFragment() {
         // Required empty public constructor
@@ -40,7 +51,7 @@ public class InsertNewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+
 
 
     }
@@ -49,13 +60,13 @@ public class InsertNewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_insert, container, false);
+        View view = inflater.inflate(R.layout.insert_dialog, container, false);
 
 
         titulo = (EditText) view.findViewById(R.id.et_title);
         descripcion = (EditText) view.findViewById(R.id.et_desc);
         fecha =(TextView) view.findViewById(R.id.tv5);
-        hora = (TextView) view.findViewById(R.id.tv6);
+        hora = (TextView) view.findViewById(R.id.tvhora);
         geo = (EditText) view.findViewById(R.id.et_geo);
 
         Date fechaActual = new Date();
@@ -69,9 +80,44 @@ public class InsertNewFragment extends Fragment {
         String formattedTime=sdf.format(horas);
 
         hora.setText(formattedTime);
+        toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
+        btn = (Button) view.findViewById(R.id.btn_añadir);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast toast1 =
+                        Toast.makeText(getActivity(),
+                                "Evento Insertado", Toast.LENGTH_SHORT);
+                toast1.show();
+                GuardarEvento();
+                dismissAllowingStateLoss();
 
-        ImageButton fab = (ImageButton) view.findViewById(R.id.fav_enviar);
+            }
+        });
+
+        imgDate = (ImageView) view.findViewById(R.id.imageDate);
+        imgDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                DialogFragment newFragment = new DatePickerFragment();
+                newFragment.show(getFragmentManager(), "datePicker");
+            }
+        });
+
+        imgClock = (ImageView) view.findViewById(R.id.imageClock);
+        imgClock.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DialogFragment newTimeFragment = new TimePickerFragment();
+                newTimeFragment.show(getFragmentManager(),"timePicker");
+
+            }
+        });
+
+        /*ImageButton fab = (ImageButton) view.findViewById(R.id.fav_enviar);
         fab.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -85,11 +131,10 @@ public class InsertNewFragment extends Fragment {
 
                     }
                 }
-        );
+        );*/
 
         return view;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -107,7 +152,6 @@ public class InsertNewFragment extends Fragment {
         }
 
     }
-
     private void GuardarEvento() {
 
         String dirs = geo.getText().toString();
@@ -139,4 +183,9 @@ public class InsertNewFragment extends Fragment {
             );
         }
 
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        return false;
     }
+
+}

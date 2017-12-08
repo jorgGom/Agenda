@@ -20,8 +20,10 @@ import android.view.MenuItem;
 import com.ccs.agenda.R;
 import com.ccs.agenda.fragments.AjustesFragment;
 import com.ccs.agenda.fragments.CalendarioFragment;
+import com.ccs.agenda.fragments.DetailFragment;
 import com.ccs.agenda.fragments.MainDatePickerFragment;
 import com.ccs.agenda.fragments.MyListFragment;
+import com.ccs.agenda.fragments.TemasFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -33,17 +35,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Crear un nuevo evento", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                MainActivity.this.startActivity(
-                            new Intent(MainActivity.this, InsertNewActivity.class)
-                        );
-            }
-        });
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -80,23 +72,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.calender) {
-            DialogFragment newFragment = new MainDatePickerFragment();
-            newFragment.show(getSupportFragmentManager(), "datePicker");
-
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
@@ -112,11 +87,12 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_calendar) {
             fragmentManager.beginTransaction().replace(R.id.contenedor, new CalendarioFragment()).commit();
         } else if (id == R.id.nav_share) {
-            fragmentManager.beginTransaction().replace(R.id.contenedor, new CalendarioFragment()).commit();
+            fragmentManager.beginTransaction().replace(R.id.contenedor, new DetailFragment()).commit();
         } else if (id == R.id.nav_manage) {
             fragmentManager.beginTransaction().replace(R.id.contenedor, new AjustesFragment()).commit();
+        } else if (id == R.id.nav_send) {
+            fragmentManager.beginTransaction().replace(R.id.contenedor, new TemasFragment()).commit();
         }
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

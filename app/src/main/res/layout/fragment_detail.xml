@@ -1,13 +1,37 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="20dp"
     android:background="@color/detail_background"
     android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:elevation="2dp"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_horizontal_margin">
+
+        <TextView
+            android:id="@+id/titulo_text"
+            style="@style/TextAppearance.AppCompat.Title.Inverse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLines="2"
+            android:text="Titulo"
+            android:textIsSelectable="true" />
+
+    </LinearLayout>
 
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="70">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -84,17 +108,17 @@
                             android:id="@+id/geo_text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
                             android:text="Localizacion"
                             android:textAppearance="?android:attr/textAppearanceLarge"
-                            android:textColor="@color/primary"
-                            android:layout_marginLeft="10dp"/>
+                            android:textColor="@color/primary" />
 
                         <TextView
                             android:id="@+id/geo_label"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Localizacion"
                             android:layout_marginLeft="10dp"
+                            android:text="Localizacion"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
                     </LinearLayout>
 
@@ -142,27 +166,6 @@
             </android.support.v7.widget.CardView>
         </RelativeLayout>
     </ScrollView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        android:elevation="2dp"
-        android:orientation="vertical"
-        android:padding="@dimen/activity_horizontal_margin">
-
-        <TextView
-            android:id="@+id/titulo_text"
-            style="@style/TextAppearance.AppCompat.Title.Inverse"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:maxLines="2"
-            android:text="Titulo"
-            android:textIsSelectable="true" />
-
-    </LinearLayout>
 
 
 </LinearLayout>

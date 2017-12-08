@@ -37,13 +37,14 @@ public class InsertNewActivity extends AppCompatActivity {
         return true;
 
     }
-    public void showDatePickerDialog(View v) {
+    /*public void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getSupportFragmentManager(), "datePicker");
-    }
+    }*/
 
-    public void showTimePickerDialog(View v){
+    /*public void showTimePickerDialog(View v){
         DialogFragment newTimeFragment = new TimePickerFragment();
         newTimeFragment.show(getSupportFragmentManager(),"timePicker");
-    }
+    }*/
+
 }

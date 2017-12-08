@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="10dp"
+        android:layout_margin="15dp"
         android:orientation="vertical">
 
         <TextView
@@ -36,9 +36,8 @@
                 android:id="@+id/rdb_claro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:duplicateParentState="true"
-                android:textAlignment="textStart" />
+                android:layout_marginRight="150dp"
+                android:duplicateParentState="true" />
 
         </LinearLayout>
 
@@ -58,7 +57,7 @@
                 android:id="@+id/rdb_oscuro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_marginRight="150dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -77,7 +76,7 @@
                 android:id="@+id/rdb_rosa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_marginRight="150dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -96,7 +95,7 @@
                 android:id="@+id/rdb_morado"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_marginRight="150dp"
                 android:elevation="1dp" />
         </LinearLayout>
 
@@ -116,7 +115,7 @@
                 android:id="@+id/rdb_sandia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_marginRight="150dp" />
         </LinearLayout>
 
     </LinearLayout>

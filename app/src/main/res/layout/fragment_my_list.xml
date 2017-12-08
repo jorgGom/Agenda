@@ -6,7 +6,6 @@
     tools:context=".activity.MainActivity">
 
 
-
     <TextView
         android:id="@+id/FechaSelecionada"
         android:layout_width="wrap_content"
@@ -30,5 +29,18 @@
         android:text="No hay eventos en esta fecha"
         android:gravity="center"
         android:textSize="18dp"/>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:src="@drawable/ic_add_black_24dp"
+        app:backgroundTint="@color/colorFab"
+        app:fabSize="normal"
+        app:rippleColor="@color/colorPrimaryDark"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="20dp"/>
 
 </RelativeLayout>
